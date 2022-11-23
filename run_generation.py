@@ -1,6 +1,11 @@
 import argparse
+import json
+from utils import load, load_pickle, write_pickle
 from decoder.simplifier import *
-from utils import load, load_pickle, write_pickle, Namespace
+
+class Namespace:
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
 
 def get_params():
     parser = argparse.ArgumentParser()
@@ -22,7 +27,8 @@ def run_simplification(config):
     if config.lang == 'en':
         import spacy
         import benepar
-        nlp = load_pickle(config.nlp_path)
+	# run 'python -m spacy download en_core_web_sm' to get this package
+        nlp = spacy.load('en_core_web_sm') 
     else: 
         from decoder.vnnlp import pos_converter, dep_converter, Token, nlp
 

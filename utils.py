@@ -1,4 +1,5 @@
 import pickle
+import numpy as np
 
 class Namespace:
   def __init__(self, **kwargs):
